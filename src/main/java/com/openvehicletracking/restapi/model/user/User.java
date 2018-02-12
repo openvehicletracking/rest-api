@@ -36,11 +36,11 @@ public class User implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean isActive;
 
+    @CreatedDate
+    private Date createdAt;
 
-    private long createdAt;
-
-
-    private long updatedAt;
+    @LastModifiedDate
+    private Date updatedAt;
 
 
     public String getId() {
@@ -137,20 +137,19 @@ public class User implements UserDetails {
         isActive = active;
     }
 
-
-    public long getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

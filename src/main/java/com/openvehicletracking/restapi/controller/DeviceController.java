@@ -24,7 +24,6 @@ public class DeviceController {
     @RequestMapping(method = RequestMethod.GET, value = "{deviceId}/messages")
     @PreAuthorize("@deviceAuthorityChecker.check(authentication.authorities, #deviceId)")
     public Iterable<DeviceMessage> getAll(@PathVariable String deviceId) {
-
         return deviceMessageRepository.findByDeviceId(deviceId, Sort.by(Sort.Direction.DESC, "datetime"));
     }
 }
