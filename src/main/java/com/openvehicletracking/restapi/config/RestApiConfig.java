@@ -11,7 +11,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.openvehicletracking.restapi")
-@PropertySource("classpath:application.properties")
+@PropertySource("file:${CONFIG_PATH}/application.properties")
 public class RestApiConfig extends WebMvcConfigurerAdapter {
 
     @Override

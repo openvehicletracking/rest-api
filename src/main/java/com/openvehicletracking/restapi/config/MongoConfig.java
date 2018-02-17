@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories(basePackages = "com.openvehicletracking.restapi.repository")
-@PropertySource("classpath:mongodb.properties")
+@PropertySource("file:${CONFIG_PATH}/mongodb.properties")
 public class MongoConfig extends AbstractMongoConfiguration {
 
     private final Environment environment;
