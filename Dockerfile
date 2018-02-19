@@ -11,6 +11,8 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 RUN mkdir -p /opt/app/config
 COPY config/* /opt/app/config/
 
+RUN rm -rf /usr/local/tomcat/webapps/*
+
 COPY build/libs/restapi.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
