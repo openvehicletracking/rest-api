@@ -1,7 +1,7 @@
 package com.openvehicletracking.restapi.controller;
 
-import com.openvehicletracking.restapi.model.dto.LoginRequestDTO;
-import com.openvehicletracking.restapi.model.dto.LoginResponseDTO;
+import com.openvehicletracking.restapi.model.dto.login.LoginRequestDTO;
+import com.openvehicletracking.restapi.model.dto.login.LoginResponseDTO;
 import com.openvehicletracking.restapi.repository.UserRepository;
 import com.openvehicletracking.restapi.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;

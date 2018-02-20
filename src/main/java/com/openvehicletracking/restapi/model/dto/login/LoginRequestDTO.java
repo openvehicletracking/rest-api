@@ -1,4 +1,4 @@
-package com.openvehicletracking.restapi.model.dto;
+package com.openvehicletracking.restapi.model.dto.login;
 
 public class LoginRequestDTO {
 

@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DeviceMessageRepository extends CrudRepository<DeviceMessage, String> {
 
+    String FIELD_DATETIME = "datetime";
 
     @Query("{ 'device.deviceId': ?0 }")
     Iterable<DeviceMessage> findByDeviceId(String deviceId, Sort sort);

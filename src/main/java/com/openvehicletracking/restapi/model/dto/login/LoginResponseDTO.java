@@ -1,4 +1,4 @@
-package com.openvehicletracking.restapi.model.dto;
+package com.openvehicletracking.restapi.model.dto.login;
 
 import com.openvehicletracking.restapi.model.user.User;
 import org.springframework.security.core.Authentication;
