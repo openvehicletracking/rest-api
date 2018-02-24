@@ -1,5 +1,6 @@
 package com.openvehicletracking.restapi.model;
 
+import com.openvehicletracking.core.GpsStatus;
 import com.openvehicletracking.core.Position;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +18,7 @@ public class DeviceMessage {
     private String protocolName;
     private Integer messageType;
     private Position position;
+    private GpsStatus gpsStatus;
     private Long datetime;
 
     public String getId() {
@@ -81,5 +83,13 @@ public class DeviceMessage {
 
     public void setDatetime(Long datetime) {
         this.datetime = datetime;
+    }
+
+    public GpsStatus getGpsStatus() {
+        return gpsStatus;
+    }
+
+    public void setGpsStatus(GpsStatus gpsStatus) {
+        this.gpsStatus = gpsStatus;
     }
 }

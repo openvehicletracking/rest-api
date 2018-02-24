@@ -1,5 +1,6 @@
 package com.openvehicletracking.restapi.controller;
 
+import com.openvehicletracking.restapi.exception.InvalidDateRangeException;
 import com.openvehicletracking.restapi.model.DeviceMessage;
 import com.openvehicletracking.restapi.model.dto.device.MessageRequestDTO;
 import com.openvehicletracking.restapi.service.DeviceService;
@@ -23,8 +24,8 @@ public class DeviceController {
 
     @RequestMapping(method = RequestMethod.GET, value = "{deviceId}/messages")
     @PreAuthorize("@deviceAuthorityChecker.check(authentication.authorities, #deviceId)")
-    public Iterable<DeviceMessage> getAll(@PathVariable String deviceId, MessageRequestDTO messageRequestDTO) {
+    public Iterable<DeviceMessage> getAll(@PathVariable String deviceId, MessageRequestDTO messageRequestDTO) throws InvalidDateRangeException {
         messageRequestDTO.setDeviceId(deviceId);
-        return deviceService.getMessages(messageRequestDTO);
+        return deviceService.getLocationMessages(messageRequestDTO);
     }
 }

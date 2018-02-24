@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class MessageRequestDTO {
 
-    private static final String DATE_FORMAT = "yyyyMMddHHmmss";
+    public static final String DATE_FORMAT = "yyyyMMddHHmmss";
     private final ThreadLocal<SimpleDateFormat> dateFormatter = ThreadLocal.withInitial(() -> new SimpleDateFormat(DATE_FORMAT));
 
     private String deviceId;
@@ -22,7 +22,7 @@ public class MessageRequestDTO {
     private Sort sortDirection = Sort.by(Sort.Direction.DESC, DeviceMessageRepository.FIELD_DATETIME);
 
     public Optional<Date> fromDate() {
-        return Optional.of(from);
+        return Optional.ofNullable(from);
     }
 
     public void setFrom(String from) {
@@ -32,7 +32,7 @@ public class MessageRequestDTO {
     }
 
     public Optional<Date> toDate() {
-        return Optional.of(to);
+        return Optional.ofNullable(to);
     }
 
     public void setTo(String to) {
@@ -67,7 +67,7 @@ public class MessageRequestDTO {
 
     public void setSortDirection(String direction) {
         try {
-            this.sortDirection = Sort.by(direction, DeviceMessageRepository.FIELD_DATETIME);
+            this.sortDirection = Sort.by(Sort.Direction.fromString(direction), DeviceMessageRepository.FIELD_DATETIME);
         } catch (IllegalArgumentException ignored) {}
 
     }
