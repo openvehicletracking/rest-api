@@ -1,23 +1,16 @@
 package com.openvehicletracking.restapi.service;
 
-
-
-import com.openvehicletracking.restapi.config.MongoConfig;
 import com.openvehicletracking.restapi.exception.InvalidDateRangeException;
 import com.openvehicletracking.restapi.model.dto.device.MessageRequestDTO;
 import com.openvehicletracking.restapi.repository.DeviceMessageRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,8 +18,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.anyLong;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = MongoConfig.class, loader = AnnotationConfigContextLoader.class)
 public class DeviceServiceTest {
 
     @Mock
