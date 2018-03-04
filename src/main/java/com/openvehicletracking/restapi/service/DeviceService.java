@@ -24,25 +24,13 @@ public class DeviceService {
     }
 
     public Iterable<DeviceMessage> getLocationMessages(MessageRequestDTO messageRequestDTO) throws InvalidDateRangeException {
-        Date fromDate, toDate;
+        Date fromDate = null, toDate = null;
         if (messageRequestDTO.fromDate().isPresent() && messageRequestDTO.toDate().isPresent()) {
             fromDate = messageRequestDTO.fromDate().get();
             toDate = messageRequestDTO.toDate().get();
             if (toDate.before(fromDate) || Objects.equals(fromDate.getTime(), toDate.getTime())) {
                 throw new InvalidDateRangeException("Invalid date range");
             }
-        } else {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            toDate = calendar.getTime();
-
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-
-            fromDate = calendar.getTime();
         }
 
         Pageable page;
@@ -52,6 +40,14 @@ public class DeviceService {
             page = PageRequest.of(0, messageRequestDTO.getLimit(), messageRequestDTO.getSortDirection());
         }
 
-        return messageRepository.findLocationMessages(messageRequestDTO.getDeviceId(), fromDate.getTime(), toDate.getTime(), page);
+        if (toDate != null && fromDate != null && messageRequestDTO.getStatus() != null) {
+            return messageRepository.findLocationMessages(messageRequestDTO.getDeviceId(), fromDate.getTime(), toDate.getTime(), messageRequestDTO.getStatus(), page);
+        } else if (toDate != null && fromDate != null && messageRequestDTO.getStatus() == null) {
+            return messageRepository.findValidLocationMessagesByDateRange(messageRequestDTO.getDeviceId(), fromDate.getTime(), toDate.getTime(), page);
+        } else if (messageRequestDTO.getStatus() != null) {
+            return messageRepository.findLocationMessages(messageRequestDTO.getDeviceId(), messageRequestDTO.getStatus(), page);
+        }
+
+        return messageRepository.findValidLocationMessages(messageRequestDTO.getDeviceId(), page);
     }
 }

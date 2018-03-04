@@ -42,7 +42,7 @@ public class MessageRequestDTO {
     }
 
     public GpsStatus getStatus() {
-        return (status == null) ? GpsStatus.VALID : status;
+        return status;
     }
 
     public void setStatus(GpsStatus status) {
