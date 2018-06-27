@@ -59,6 +59,7 @@ public class RestApiSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/user/access-token").permitAll()
+            .antMatchers("/test-resource/**").permitAll()
             .antMatchers("/**")
             .authenticated()
         .and()

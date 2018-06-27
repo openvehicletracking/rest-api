@@ -25,13 +25,13 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     @Bean
     public MongoClient mongoClient() {
-        ServerAddress serverAddress = new ServerAddress(environment.getRequiredProperty("host"), Integer.parseInt(environment.getRequiredProperty("port")));
+        ServerAddress serverAddress = new ServerAddress(environment.getRequiredProperty("mongodb.host"), Integer.parseInt(environment.getRequiredProperty("mongodb.port")));
         return new MongoClient(serverAddress);
     }
 
     @Override
     protected String getDatabaseName() {
-        return environment.getRequiredProperty("database");
+        return environment.getRequiredProperty("mongodb.database");
     }
 
 }
