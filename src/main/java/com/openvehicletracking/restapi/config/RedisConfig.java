@@ -1,6 +1,7 @@
 package com.openvehicletracking.restapi.config;
 
 
+import com.openvehicletracking.restapi.repository.DeviceStateRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,5 +32,11 @@ public class RedisConfig {
     public StringRedisTemplate stringRedisTemplate() {
         return new StringRedisTemplate(jedisConnectionFactory());
     }
+
+    @Bean
+    public DeviceStateRedisTemplate deviceStateRedisTemplate() {
+        return new DeviceStateRedisTemplate(jedisConnectionFactory());
+    }
+
 
 }

@@ -1,15 +1,13 @@
 package com.openvehicletracking.restapi.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openvehicletracking.core.DeviceState;
+import com.openvehicletracking.restapi.repository.DeviceStateRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,12 +15,13 @@ import java.util.Map;
 @RequestMapping(path = "/test-resource")
 public class HelloController {
 
-    private final StringRedisTemplate redisTemplate;
-    private ObjectMapper objectMapper = new ObjectMapper();
+
+
+    private final DeviceStateRedisTemplate deviceStateRedisTemplate;
 
     @Autowired
-    public HelloController(StringRedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
+    public HelloController(DeviceStateRedisTemplate deviceStateRedisTemplate) {
+        this.deviceStateRedisTemplate = deviceStateRedisTemplate;
     }
 
     @RequestMapping(path = "/hello/{name}", method = RequestMethod.GET)
@@ -33,14 +32,9 @@ public class HelloController {
     }
 
 
-    @RequestMapping(path = "/redis", method = RequestMethod.GET)
-    public DeviceState test() {
-        try {
-            return objectMapper.readValue(redisTemplate.boundValueOps("state_86307101991574012").get(), DeviceState.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    @RequestMapping(path = "/redis/{key}", method = RequestMethod.GET)
+    public DeviceState test(@PathVariable(name = "key") String redisKey) {
+        return deviceStateRedisTemplate.boundValueOps(redisKey).get();
     }
 
 }
