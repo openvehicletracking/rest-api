@@ -25,7 +25,7 @@ public class RestApiConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/**").allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
                 .allowCredentials(true)
-                .allowedHeaders("Content-Type","X-Requested-With","accept","Origin","Access-Control-Request-Method","Access-Control-Request-Headers","x-access-token","Authorization", "yunus");
+                .allowedHeaders("Content-Type","X-Requested-With","accept","Origin","Access-Control-Request-Method","Access-Control-Request-Headers","x-access-token","Authorization");
 
     }
 }
