@@ -1,5 +1,6 @@
 package com.openvehicletracking.restapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.openvehicletracking.core.GpsStatus;
 import com.openvehicletracking.core.Position;
 import org.springframework.data.annotation.Id;
@@ -29,6 +30,7 @@ public class DeviceMessage {
         this.id = id;
     }
 
+    @JsonIgnore
     public Device getDevice() {
         return device;
     }

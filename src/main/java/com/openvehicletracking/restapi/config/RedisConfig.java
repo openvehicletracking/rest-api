@@ -24,7 +24,10 @@ public class RedisConfig {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(environment.getProperty("redis.host", "localhost"), Integer.parseInt(environment.getProperty("redis.port", "6379")));
+        String host = environment.getProperty("redis.host", "localhost");
+        int port = 6379;
+
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(host, port);
         return new JedisConnectionFactory(config);
     }
 

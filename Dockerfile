@@ -9,7 +9,10 @@ RUN echo "Europe/Istanbul" > /etc/timezone
 RUN rm -f /etc/localtime
 RUN dpkg-reconfigure -f noninteractive tzdata
 RUN mkdir -p /opt/app/config
+
 COPY config/* /opt/app/config/
+COPY config/web.xml /usr/local/tomcat/conf/web.xml
+
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 
