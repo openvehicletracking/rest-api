@@ -15,6 +15,7 @@ public class Route {
 
     @Indexed(unique = true)
     private String deviceId;
+
     private List<Account> accounts;
     private Map<String, Object> route;
 

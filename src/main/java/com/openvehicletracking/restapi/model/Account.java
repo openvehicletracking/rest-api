@@ -15,7 +15,6 @@ public class Account implements Serializable {
     @Id
     private String id;
 
-    @Indexed(unique = true)
     private String account;
     private String email;
     private String info;

@@ -7,6 +7,8 @@ import com.openvehicletracking.restapi.model.dto.device.MessageRequestDTO;
 import com.openvehicletracking.restapi.repository.DeviceStateRedisTemplate;
 import com.openvehicletracking.restapi.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +38,12 @@ public class DeviceController {
 
     @RequestMapping("{deviceId}/state")
     @PreAuthorize("@deviceAuthorityChecker.check(authentication.authorities, #deviceId)")
-    public DeviceState getDeviceState(@PathVariable String deviceId) {
-        return deviceStateRedisTemplate.getStateOfDevice(deviceId);
-    }
+    public ResponseEntity<DeviceState> getDeviceState(@PathVariable String deviceId) {
+        DeviceState state = deviceStateRedisTemplate.getStateOfDevice(deviceId);
+        if (state == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
+        return new ResponseEntity<>(state, HttpStatus.OK);
+    }
 }

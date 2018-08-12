@@ -45,7 +45,9 @@ public class DeviceStateRedisTemplate extends RedisTemplate<String, DeviceState>
         @Override
         public DeviceState deserialize(byte[] bytes) {
             try {
-                return DeviceStateRedisTemplate.this.objectMapper.readValue(bytes, DeviceState.class);
+                if (bytes != null) {
+                    return DeviceStateRedisTemplate.this.objectMapper.readValue(bytes, DeviceState.class);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

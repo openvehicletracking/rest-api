@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +29,13 @@ public class RoutesController {
 
     @RequestMapping(method = RequestMethod.GET, value = "{deviceId}")
     @PreAuthorize("@deviceAuthorityChecker.check(authentication.authorities, #deviceId)")
-    public Route getRoutes(@PathVariable String deviceId) {
-        return routeRepository.findByDeviceId(deviceId);
+    public ResponseEntity<Route> getRoutes(@PathVariable String deviceId) {
+        Route route = routeRepository.findByDeviceId(deviceId);
+        if (route == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(route, HttpStatus.OK);
     }
 
 

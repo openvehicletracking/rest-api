@@ -1,5 +1,4 @@
-FROM tomcat:7-jre8
-
+FROM tomcat:8-jre8
 
 MAINTAINER MotoDev OpenMTS <motodevnet@gmail.com>
 
